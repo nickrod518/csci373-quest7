@@ -1,0 +1,19 @@
+name: Quest6
+main: edu.unca.nrodrigu.Quest6.Quest6
+version: ${project.version}
+author: Nick Rodriguez
+description: ${project.description}
+commands:
+  demo:
+    description: the based for this plugin
+    usage: /<demo> command 
+    permission: demo.*
+permissions:
+  demo.*:
+    description: permissions of all demo plugin commands
+    default: true
+    children:
+      demo.cake:
+        description: give the player a block of cake
+      demo.pit:
+        description: transforms next 10 blocks below player to air
