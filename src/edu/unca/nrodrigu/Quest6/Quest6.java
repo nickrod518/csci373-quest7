@@ -11,9 +11,6 @@ public class Quest6 extends JavaPlugin {
 		// save the configuration file
 		saveDefaultConfig();
 
-		// Create the SampleListener
-		new Quest6Listener(this);
-
 		// set the command executor for sample
 		this.getCommand("cake").setExecutor(new Quest6CommandExecutor(this));
 		this.getCommand("pit").setExecutor(new Quest6CommandExecutor(this));
@@ -27,4 +24,5 @@ public class Quest6 extends JavaPlugin {
 	public void onDisable() {
 
 	}
+	
 }

@@ -34,6 +34,7 @@ public class Quest6CommandExecutor implements CommandExecutor {
 			Player fred = (Player) sender;
 			fred.getInventory().addItem(new ItemStack(Material.CAKE, 1));
 			return true;
+			
 			// changes the next 10 blocks below player to air
 		} else if (command.getName().equalsIgnoreCase("pit")) {
 			sender.sendMessage("Ahhhhhh!!!");
@@ -46,6 +47,7 @@ public class Quest6CommandExecutor implements CommandExecutor {
 				b.setTypeId(0);
 			}
 			return true;
+			
 			// the block below the player turns to gold
 		} else if (command.getName().equalsIgnoreCase("midas")) {
 			sender.sendMessage("The floor below you turns to gold!");
