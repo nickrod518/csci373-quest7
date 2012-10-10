@@ -19,14 +19,21 @@ commands:
     usage: /midas
     permission: quest6.*
     permission-message: You don't have permission.
+  defend:
+    description: launch a horde of zombies - defend yourself with a diamond sword
+    usage: /zdefend
+    permission: quest6.*
+    permission-message: You don't have permission.
 permissions:
   quest6.*:
     description: permissions of all quest6 plugin commands
     default: true
     children:
-      demo.cake:
+      quest6.cake:
         description: give the player a block of cake
-      demo.pit:
+      quest6.pit:
         description: transforms next 10 blocks below player to air
-      demo.midas:
+      quest6.midas:
         description: transform the block player is standing on to gold
+      quest6.zdefend:
+        description: launch a horde of zombies - defend yourself with a diamond sword

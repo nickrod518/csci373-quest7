@@ -15,6 +15,7 @@ public class Quest6 extends JavaPlugin {
 		this.getCommand("cake").setExecutor(new Quest6CommandExecutor(this));
 		this.getCommand("pit").setExecutor(new Quest6CommandExecutor(this));
 		this.getCommand("midas").setExecutor(new Quest6CommandExecutor(this));
+		this.getCommand("zdefend").setExecutor(new Quest6CommandExecutor(this));
 	}
 
 	/*

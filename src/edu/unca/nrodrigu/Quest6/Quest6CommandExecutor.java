@@ -7,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -28,6 +29,7 @@ public class Quest6CommandExecutor implements CommandExecutor {
 	/*
 	 * On command set the sample message
 	 */
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 			// player receives cake
 		if (command.getName().equalsIgnoreCase("cake")) {
@@ -57,6 +59,23 @@ public class Quest6CommandExecutor implements CommandExecutor {
 			loc.setY(loc.getY() - 1);
 			Block b = w.getBlockAt(loc);
 			b.setTypeId(41);
+			return true;
+		
+			// spawn 10 zombies in random locations around the player
+			// and spawn a diamond sword in the player's inventory
+		} else if (command.getName().equalsIgnoreCase("zdefend")){
+			sender.sendMessage("Look out for the Zombies!");
+			Player fred = (Player) sender;
+			for (int i = 0; i < 10; ++i) {
+				Location loc = fred.getLocation();
+				World w = loc.getWorld();
+				int x = (-20) + (int)(Math.random() * ((20 - (-20)) + 1));
+				int y = (-20) + (int)(Math.random() * ((20 - (-20)) + 1));
+				loc.setX(loc.getX() + x);
+				loc.setZ(loc.getZ() + y);
+				w.spawnCreature(loc, EntityType.ZOMBIE);
+			}
+			fred.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD, 1));
 			return true;
 		} else {
 			return false;
