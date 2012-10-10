@@ -1,12 +1,14 @@
 package edu.unca.nrodrigu.Quest6;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /*
  * This is a sample CommandExectuor
@@ -26,25 +28,15 @@ public class Quest6CommandExecutor implements CommandExecutor {
 	/*
 	 * On command set the sample message
 	 */
-	public boolean onCommand(CommandSender sender, Command command,String label, String[] args) {
-		if (args.length == 0) {
-			sender.sendMessage("You didn't enter any arguments.");
-			return false;
-		} else if (!(sender instanceof Player)) {
-			sender.sendMessage("This command can only be run by a player.");
-			return false;
-			// the cake will appear on the ground but not
-			// necessarily where the player is looking
-		} else if (args[0].equalsIgnoreCase("cake")) {
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+			// player receives cake
+		if (command.getName().equalsIgnoreCase("cake")) {
 			Player fred = (Player) sender;
-			Location loc = fred.getLocation();
-			World w = loc.getWorld();
-			loc.setX(loc.getX() + 1);
-			Block b = w.getBlockAt(loc);
-			b.setTypeId(92);
+			fred.getInventory().addItem(new ItemStack(Material.CAKE, 1));
 			return true;
 			// changes the next 10 blocks below player to air
-		} else if (args[0].equalsIgnoreCase("pit")) {
+		} else if (command.getName().equalsIgnoreCase("pit")) {
+			sender.sendMessage("Ahhhhhh!!!");
 			Player fred = (Player) sender;
 			Location loc = fred.getLocation();
 			World w = loc.getWorld();
@@ -53,6 +45,16 @@ public class Quest6CommandExecutor implements CommandExecutor {
 				Block b = w.getBlockAt(loc);
 				b.setTypeId(0);
 			}
+			return true;
+			// the block below the player turns to gold
+		} else if (command.getName().equalsIgnoreCase("midas")) {
+			sender.sendMessage("The floor below you turns to gold!");
+			Player fred = (Player) sender;
+			Location loc = fred.getLocation();
+			World w = loc.getWorld();
+			loc.setY(loc.getY() - 1);
+			Block b = w.getBlockAt(loc);
+			b.setTypeId(41);
 			return true;
 		} else {
 			return false;

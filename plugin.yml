@@ -1,19 +1,32 @@
 name: Quest6
 main: edu.unca.nrodrigu.Quest6.Quest6
-version: ${project.version}
+version: 0.1
 author: Nick Rodriguez
-description: ${project.description}
+description: Simple commands plugin
 commands:
-  demo:
-    description: the based for this plugin
-    usage: /<demo> command 
-    permission: demo.*
+  cake:
+    description: give the player a block of cake
+    usage: /cake
+    permission: quest6.*
+    permission-message: You don't have permission.
+  pit:
+    description: transforms next 10 blocks below player to air
+    usage: /pit
+    permission: quest6.*
+    permission-message: You don't have permission.
+  midas:
+    description: transforms block below player to gold
+    usage: /midas
+    permission: quest6.*
+    permission-message: You don't have permission.
 permissions:
-  demo.*:
-    description: permissions of all demo plugin commands
+  quest6.*:
+    description: permissions of all quest6 plugin commands
     default: true
     children:
       demo.cake:
         description: give the player a block of cake
       demo.pit:
         description: transforms next 10 blocks below player to air
+      demo.midas:
+        description: transform the block player is standing on to gold

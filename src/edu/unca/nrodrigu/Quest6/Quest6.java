@@ -15,7 +15,9 @@ public class Quest6 extends JavaPlugin {
 		new Quest6Listener(this);
 
 		// set the command executor for sample
-		this.getCommand("demo").setExecutor(new Quest6CommandExecutor(this));
+		this.getCommand("cake").setExecutor(new Quest6CommandExecutor(this));
+		this.getCommand("pit").setExecutor(new Quest6CommandExecutor(this));
+		this.getCommand("midas").setExecutor(new Quest6CommandExecutor(this));
 	}
 
 	/*
