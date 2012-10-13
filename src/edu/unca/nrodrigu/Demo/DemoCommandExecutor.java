@@ -1,5 +1,6 @@
-package edu.unca.nrodrigu.Quest6;
+package edu.unca.nrodrigu.Demo;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,15 +15,14 @@ import org.bukkit.inventory.ItemStack;
 /*
  * This is a sample CommandExectuor
  */
-public class Quest6CommandExecutor implements CommandExecutor {
-	@SuppressWarnings("unused")
-	private final Quest6 plugin;
+public class DemoCommandExecutor implements CommandExecutor {
+	private final Demo plugin;
 
 	/*
 	 * This command executor needs to know about its plugin from which it came
 	 * from
 	 */
-	public Quest6CommandExecutor(Quest6 plugin) {
+	public DemoCommandExecutor(Demo plugin) {
 		this.plugin = plugin;
 	}
 
@@ -31,14 +31,19 @@ public class Quest6CommandExecutor implements CommandExecutor {
 	 */
 	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		if (args.length == 0) {
+			return false;
+		} else if (!(sender instanceof Player)) {
+			return false;
+			
 			// player receives cake
-		if (command.getName().equalsIgnoreCase("cake")) {
+		} else if (args[0].equalsIgnoreCase("cake")) {
 			Player fred = (Player) sender;
 			fred.getInventory().addItem(new ItemStack(Material.CAKE, 1));
 			return true;
 			
 			// changes the next 10 blocks below player to air
-		} else if (command.getName().equalsIgnoreCase("pit")) {
+		} else if (args[0].equalsIgnoreCase("pit")) {
 			sender.sendMessage("Ahhhhhh!!!");
 			Player fred = (Player) sender;
 			Location loc = fred.getLocation();
@@ -51,7 +56,7 @@ public class Quest6CommandExecutor implements CommandExecutor {
 			return true;
 			
 			// the block below the player turns to gold
-		} else if (command.getName().equalsIgnoreCase("midas")) {
+		} else if (args[0].equalsIgnoreCase("midas")) {
 			sender.sendMessage("The floor below you turns to gold!");
 			Player fred = (Player) sender;
 			Location loc = fred.getLocation();
@@ -63,7 +68,7 @@ public class Quest6CommandExecutor implements CommandExecutor {
 		
 			// spawn 10 zombies in random locations around the player
 			// and spawn a diamond sword in the player's inventory
-		} else if (command.getName().equalsIgnoreCase("zdefend")){
+		} else if (args[0].equalsIgnoreCase("zdefend")){
 			sender.sendMessage("Look out for the Zombies!");
 			Player fred = (Player) sender;
 			for (int i = 0; i < 10; ++i) {
@@ -76,6 +81,29 @@ public class Quest6CommandExecutor implements CommandExecutor {
 				w.spawnCreature(loc, EntityType.ZOMBIE);
 			}
 			fred.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD, 1));
+			// log who initiates zdefend commands
+			plugin.logger.info(fred + " initiated a zombie attack");
+			return true;
+			
+			// create a pit under a specified player, if op
+		} else if (args[0].equalsIgnoreCase("pitplayer")
+				&& sender.hasPermission("demo.pitplayer")) {
+			Player fred = plugin.getServer().getPlayer(args[1]);
+			if (fred != null) {
+				
+				Location loc = fred.getLocation();
+				World w = loc.getWorld();
+				for (int i = 0; i < 10; i++) {
+					loc.setY(loc.getY() - 1);
+					Block b = w.getBlockAt(loc);
+					b.setTypeId(0);
+				}
+				sender.sendMessage(ChatColor.RED + args[1] + " fell in to a pit");
+				plugin.logger.info(args[1] + " isn't very well liked...");
+			} else {
+				sender.sendMessage(ChatColor.RED + args[1] + " is not logged on");
+				plugin.logger.info(sender + "tried pitting a player that wasn't logged on");
+			}
 			return true;
 		} else {
 			return false;

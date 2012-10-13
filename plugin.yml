@@ -1,39 +1,35 @@
-name: Quest6
-main: edu.unca.nrodrigu.Quest6.Quest6
-version: 0.1
+name: Demo
+main: edu.unca.nrodrigu.Demo.Demo
+version: 0.2
 author: Nick Rodriguez
 description: Simple commands plugin
 commands:
-  cake:
-    description: give the player a block of cake
-    usage: /cake
-    permission: quest6.*
-    permission-message: You don't have permission.
-  pit:
-    description: transforms next 10 blocks below player to air
-    usage: /pit
-    permission: quest6.*
-    permission-message: You don't have permission.
-  midas:
-    description: transforms block below player to gold
-    usage: /midas
-    permission: quest6.*
-    permission-message: You don't have permission.
-  defend:
-    description: launch a horde of zombies - defend yourself with a diamond sword
-    usage: /zdefend
-    permission: quest6.*
-    permission-message: You don't have permission.
+  demo:
+    description: base for this plugin
+    usage: /demo <command>
+    permission: demo.*
+    permission-message: You don't have permission to use this command.
 permissions:
-  quest6.*:
-    description: permissions of all quest6 plugin commands
-    default: true
+  demo.*:
+    description: permissions of all demo plugin commands
     children:
-      quest6.cake:
+      demo.cake:
         description: give the player a block of cake
-      quest6.pit:
+        usage: /demo cake
+        default: true
+      demo.pit:
         description: transforms next 10 blocks below player to air
-      quest6.midas:
+        usage: /demo pit
+        default: true
+      demo.midas:
         description: transform the block player is standing on to gold
-      quest6.zdefend:
+        usage: /demo midas
+        default: true
+      demo.zdefend:
         description: launch a horde of zombies - defend yourself with a diamond sword
+        usage: /demo zdefend
+        default: true
+      demo.pitplayer:
+        description: create a pit under another player
+        usage: /demo pitplayer <player>
+        default: op
